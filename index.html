@@ -89,9 +89,10 @@
     <body>
         <section>
             <h1>Convert .schem files to .schematic files</h1>
-            <p>Convert the new worledit 1.13+ .schem files to the legacy .schematic files</p>
-            <label for="file">Upload your .schem file here</label>: <input id="file" type="file" onchange="upload(this)" multiple/><br/>
-            <small>Privacy notice: All schematics uploaded stay on your local machine and aren't processed by any server</small>
+            <p>Convert the new worledit 1.13+ .schem files to the legacy 1.12- .schematic files</p>
+            <p>Blocks that didn't exist in 1.12 will be replaced with air</p>
+            <label for="file">Input your .schem file here</label>: <input id="file" type="file" onchange="upload(this)" multiple/><br/>
+            <small>Privacy notice: All schematics are processed by your local machine and aren't uploaded to any server</small>
             <ul id="downloads"></ul>
             <p id="error"></p>
         </scetion>
