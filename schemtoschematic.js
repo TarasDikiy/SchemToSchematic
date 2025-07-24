@@ -13,7 +13,7 @@ var blocksNamespace = {
 'minecraft:polished_granite':18,
 'minecraft:diorite':19,
 'minecraft:polished_diorite':20,
-'minecraft:andesite':21,
+'minecraft:andesite':(976 << 4) | 0,
 'minecraft:polished_andesite':22,
 'minecraft:grass_block[snowy=false]':32,
 'minecraft:dirt':48,
@@ -1928,6 +1928,7 @@ function schemtoschematic(arrayBuffer, callback) {
             var blockdata = root.value.BlockData.value;
             var blocks = [];
             var data = [];
+            var addBlocks = [];
             var varInt = 0;
             var varIntLength = 0;
             var blockId;
@@ -1940,9 +1941,23 @@ function schemtoschematic(arrayBuffer, callback) {
                 }
                 
                 blockId = convertToLegacyBlockId(palette[varInt]);
+
+                var id = blockId >> 4;
+                var meta = blockId & 0xF;
+
+                blocks.push(id & 0xFF);        // lower 8 bits
+                data.push(meta);
                 
-                blocks.push(blockId >> 4);
-                data.push(blockId & 0xF);
+                // Handle AddBlocks (upper 4 bits)
+                var hi = id >> 8;
+                var ai = Math.floor(i / 2);
+
+                if (!addBlocks[ai]) addBlocks[ai] = 0;
+                if (i % 2 === 0) {
+                    addBlocks[ai] |= hi << 4;       // high 4 bits go to left nibble
+                } else {
+                    addBlocks[ai] |= hi;            // right nibble
+                }
                 
                 varIntLength = 0;
                 varInt = 0;
@@ -1950,6 +1965,7 @@ function schemtoschematic(arrayBuffer, callback) {
             
             root.value.Blocks = {type: 'byteArray', value: blocks};
             root.value.Data = {type: 'byteArray', value: data};
+            root.value.AddBlocks = { type: 'byteArray', value: addBlocks };
             delete root.value.BlockData;
         }
     }
