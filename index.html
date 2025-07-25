@@ -1,24 +1,15 @@
 <!doctype html>
 <html>
-    <head>
-        <!-- Global site tag (gtag.js) - Google Analytics -->
-        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-176109454-1"></script>
-        <script>
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-
-            gtag('config', 'UA-176109454-1');
-        </script>
-        
+    <head>        
         <title>Convert .Schem to .Schematic</title>
         
         <!-- https://github.com/kpanuragh/zlib -->
-        <script src="zlib.js"></script>
+        <script src="lib/zlib.js"></script>
         
         <!-- https://github.com/sjmulder/nbt-js -->
-        <script src="nbt.js"></script>
+        <script src="lib/nbt.js"></script>
         
+        <script src="blocks.js"></script>
         <script src="schemtoschematic.js"></script>
         
         <script>
