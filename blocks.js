@@ -1626,7 +1626,11 @@ var vanillaBlocksFromMod = [
     new Block({ name: "minecraft:andesite_stairs[facing=north,half=top,shape=straight,waterlogged=false]", id: 1829, meta: 7 })
 ];
 
-var merged = [...vanillaBlocks, ...vanillaBlocksFromMod]
+var modedBlocksToModedBlocks = [
+    new Block({ name: "chisel:sunken/stone", id: 1138, meta: 13 }),
+];
+
+var merged = [...vanillaBlocks, ...vanillaBlocksFromMod, ...modedBlocksToModedBlocks]
     .reduce((acc, block) => {
         acc[block.name] = block;
         return acc;
